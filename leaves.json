@@ -1,0 +1,14 @@
+[{
+    "id" : "e2", 
+    "entity_id" : "e2" ,
+    "entity_type" : "emp"
+
+},
+{
+    "id" : "e2", 
+    "entity_id" : "l2" ,
+    "entity_type" : "leave",
+    "from_date" : "2020-09-18",
+    "to_date" : "2020-09-18"
+
+}]

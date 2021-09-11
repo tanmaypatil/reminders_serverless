@@ -1,0 +1,24 @@
+{
+  "name": "leave_application_serverless",
+  "version": "1.0.0",
+  "description": "creating serverless application using aws lamdba",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanmaypatil/leave_application_serverless.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tanmaypatil/leave_application_serverless/issues"
+  },
+  "homepage": "https://github.com/tanmaypatil/leave_application_serverless#readme",
+  "dependencies": {
+    "aws-sdk": "^2.986.0",
+    "fs": "0.0.1-security"
+  }
+}
