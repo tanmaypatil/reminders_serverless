@@ -1,0 +1,27 @@
+[{
+    "user_id" : "u1", 
+    "entity_id" : "u1" ,
+    "entity_type" : "user"
+
+},
+{
+    "user_id" : "u1", 
+    "entity_id" : "a1" ,
+    "entity_type" : "alarm",
+    "alarm_type" : "reminder",
+    "description" : "divyajyot maint reminder",
+    "frequency" : "Monthly",
+    "day" : "15",
+    "next_date" : "2021-09-15"
+
+} ,
+{
+    "user_id" : "u1", 
+    "entity_id" : "a2" ,
+    "entity_type" : "alarm",
+    "alarm_type" : "reminder",
+    "description" : "credit card bill reminder",
+    "frequency" : "Monthly",
+    "next_date" : "2021-09-25"
+} 
+]
