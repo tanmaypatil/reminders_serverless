@@ -1,6 +1,5 @@
 var AWS = require("aws-sdk");
-const https = require('https');
-
+let slack = require('./send_slack');
 
 
 AWS.config.update({
@@ -26,16 +25,21 @@ var params = {
 };
 
 (async function () {
-    let arr = await query_alarm(params);
-    await send_slack(arr[0]);
-
+    try {
+        let arr = await query_alarm(params);
+        await slack.send_slack(arr[0].description);
+    }
+    catch (err) {
+        console.log(err.response.status);
+        console.log(err.response.statusText);
+    }
 })();
 
 
 async function query_alarm(params) {
     return new Promise((resolve, reject) => {
         docClient.query(params, function (err, data) {
-           
+
             if (err) {
                 console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
             } else {
@@ -54,11 +58,7 @@ async function query_alarm(params) {
 }
 
 
-async function send_slack(item) {
-    const body = { text: item.description };
 
-
-}
 
 
 
