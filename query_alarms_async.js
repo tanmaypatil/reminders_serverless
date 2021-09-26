@@ -57,24 +57,6 @@ async function query_alarm(params) {
 async function send_slack(item) {
     const body = { text: item.description };
 
-    const request = https.request(
-        {
-            host: 'https://hooks.slack.com',
-            path : '/services/T02EGJSRSCD/B02G5CQ4L80/6Gmg3DDcq7lBIyicild5XHxn',
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: { 'Content-Type': 'application/json' }
-        },
-        (res) => {
-            res.on('end', () => {
-
-            }),
-                res.on('data', (chunk) => {
-                    console.log(`BODY: ${chunk}`);
-                });
-        }
-    );
-    request.end();
 
 }
 
