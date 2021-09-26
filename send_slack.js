@@ -1,9 +1,9 @@
 const axios = require('axios').default;
+require('dotenv').config();
 
 function send_slack(message) {
-
   console.log('send_slack ' + message);
-  axios.post('https://hooks.slack.com/services/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', {
+  axios.post(process.env.SLACK_ENDPOINT, {
     text: message
   },
     {
@@ -11,7 +11,7 @@ function send_slack(message) {
     }
   )
     .then(function (response) {
-      console.log(response.statusText);
+      console.log('send_slack success ' + response.statusText);
       console.log(response.status);
     })
     .catch(function (error) {
