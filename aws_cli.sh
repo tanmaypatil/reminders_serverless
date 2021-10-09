@@ -187,7 +187,7 @@ aws dynamodb update-table \
     --key-condition-expression "person_name = :person_name  AND  birth_date BETWEEN  :start_date" \
     --expression-attribute-values '{ 
         ":person_name" : { "S" : "Tanmay" },
-        ":reminder_date": { "S": "20210915" }
+        ":birth_date": { "S": "20210915" }
     }' \
 --endpoint-url "http://localhost:8000"
 
