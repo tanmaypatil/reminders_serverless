@@ -36,6 +36,7 @@ function import_alarms() {
                 params.Item.description = alarm.description;
                 params.Item.next_date = alarm.next_date;
                 params.Item.frequency = alarm.frequency;
+                params.Item.reminder_date = alarm.reminder_date;
             }
 
             docClient.put(params, function (err, data) {

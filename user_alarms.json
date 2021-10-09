@@ -12,7 +12,8 @@
     "description" : "divyajyot maint reminder",
     "frequency" : "Monthly",
     "day" : "15",
-    "next_date" : "2021-09-15"
+    "next_date" : "2021-09-15",
+    "reminder_date" : "20210915"
 
 } ,
 {
@@ -22,6 +23,7 @@
     "alarm_type" : "reminder",
     "description" : "credit card bill reminder",
     "frequency" : "Monthly",
-    "next_date" : "2021-09-25"
+    "next_date" : "2021-09-25",
+    "reminder_date" : "20210920"
 } 
 ]
