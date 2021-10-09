@@ -13,12 +13,12 @@ function create_user_alarms() {
         var params = {
             TableName: "user_alarms",
             KeySchema: [
-                { AttributeName: "user_id", KeyType: "HASH" },  //Partition key
-                { AttributeName: "entity_id", KeyType: "RANGE" }  //Sort key
+                { AttributeName: "alarm_type", KeyType: "HASH" },  //Partition key
+                { AttributeName: "alarm_date", KeyType: "RANGE" }  //Sort key
             ],
             AttributeDefinitions: [
-                { AttributeName: "user_id", AttributeType: "S" },
-                { AttributeName: "entity_id", AttributeType: "S" }
+                { AttributeName: "alarm_type", AttributeType: "S" },
+                { AttributeName: "alarm_date", AttributeType: "S" }
 
             ],
             ProvisionedThroughput: {

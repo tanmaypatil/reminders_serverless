@@ -1,29 +1,27 @@
 [{
+    "alarm_type" : "user",
+    "alarm_date" : "20211010",
     "user_id" : "u1", 
-    "entity_id" : "u1" ,
-    "entity_type" : "user"
+    "entity_id" : "u1" 
 
 },
 {
+    "alarm_type" : "reminder",
     "user_id" : "u1", 
     "entity_id" : "a1" ,
-    "entity_type" : "alarm",
-    "alarm_type" : "reminder",
     "description" : "divyajyot maint reminder",
     "frequency" : "Monthly",
     "day" : "15",
-    "next_date" : "2021-09-15",
-    "reminder_date" : "20210915"
-
+    "alarm_date" : "20211010"
+   
 } ,
 {
+    "alarm_type" : "reminder",
     "user_id" : "u1", 
     "entity_id" : "a2" ,
-    "entity_type" : "alarm",
-    "alarm_type" : "reminder",
     "description" : "credit card bill reminder",
     "frequency" : "Monthly",
-    "next_date" : "2021-09-25",
-    "reminder_date" : "20210920"
+    "day" : "26",
+    "alarm_date" : "20211026"
 } 
 ]

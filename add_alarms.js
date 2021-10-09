@@ -25,26 +25,25 @@ function import_alarms() {
             let params = {
                 TableName: "user_alarms",
                 Item: {
+                    "alarm_type": alarm.alarm_type,
+                    "alarm_date": alarm.alarm_date,
                     "user_id": alarm.user_id,
-                    "entity_id": alarm.entity_id,
-                    "entity_type": alarm.entity_type
+                    "entity_id": alarm.entity_id
                 }
             };
 
-            if (alarm.entity_type === "alarm") {
-                params.Item.alarm_type = alarm.alarm_type;
+            if (alarm.alarm_type === "alarm") {
                 params.Item.description = alarm.description;
-                params.Item.next_date = alarm.next_date;
                 params.Item.frequency = alarm.frequency;
-                params.Item.reminder_date = alarm.reminder_date;
+                params.Item.day = alarm.day;
             }
 
             docClient.put(params, function (err, data) {
                 if (err) {
-                    console.error("Unable to add alarm", alarm.id, ". Error JSON:", JSON.stringify(err, null, 2));
+                    console.error("Unable to add alarm", alarm.entity_id, ". Error JSON:", JSON.stringify(err, null, 2));
                     reject();
                 } else {
-                    console.log("PutItem succeeded:", alarm.id);
+                    console.log("PutItem succeeded:", alarm.entity_id);
                     resolve();
                 }
             });
