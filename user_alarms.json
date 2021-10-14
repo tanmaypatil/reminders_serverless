@@ -23,5 +23,14 @@
     "frequency" : "Monthly",
     "day" : "26",
     "alarm_date" : "20211026"
-} 
+} ,
+{
+    "alarm_type" : "reminder",
+    "user_id" : "u1", 
+    "entity_id" : "a3" ,
+    "description" : "electricity bill",
+    "frequency" : "Monthly",
+    "day" : "08",
+    "alarm_date" : "20211008"
+}
 ]

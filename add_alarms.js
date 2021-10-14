@@ -32,7 +32,8 @@ function import_alarms() {
                 }
             };
 
-            if (alarm.alarm_type === "alarm") {
+            if (alarm.alarm_type === "reminder") {
+                console.log('adding alarm '+alarm.description);
                 params.Item.description = alarm.description;
                 params.Item.frequency = alarm.frequency;
                 params.Item.day = alarm.day;
