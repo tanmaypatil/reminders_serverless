@@ -1,21 +1,19 @@
 
 var add = require('date-fns/add');
-var format = require('date-fns/format')
+var format = require('date-fns/format');
+var parse = require('date-fns/parse');
 
 function getTodaysDate() {
     let d = new Date();
-    let y = d.getFullYear();
-    let m = d.getMonth();
-    let day = d.getDate();
-
-    let str = y.toString() + m.toString() + day.toString();
+    str = format(d,'yyyyMMdd');
     console.log(str);
     return str;
 }
 
 
-function addDuration(durationType , duration ) {
-    let d = new Date();
+function addDuration(durationType , duration ,contextDate ) {
+    // context date is not given , assume todays date.
+    let d = contextDate ? parse(contextDate,'yyyyMMdd',new Date()) : new Date();
     durationObj = {};
     switch(durationType) {
         case 'Months':
@@ -35,9 +33,17 @@ function addDuration(durationType , duration ) {
     //console.log('out_str  : '+out_str);
     return out_str;
 }
-
+/*
 let out_str = addDuration('Month',2);
 console.log(' out_str : '+out_str);
+out_str = getTodaysDate();
+console.log('todays date '+out_str);
+let x = parse('20211017', 'yyyyMMdd', new Date());
+console.log('parsed date '+x);
+
+let y = addDuration('Month',1,'20211017');
+console.log(' after adding month - y is '+y);
+*/
 
 module.exports = {
     getTodaysDate : getTodaysDate,

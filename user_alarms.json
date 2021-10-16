@@ -22,7 +22,7 @@
     "description" : "credit card bill reminder",
     "frequency" : "Monthly",
     "day" : "26",
-    "alarm_date" : "20211026"
+    "alarm_date" : "20210926"
 } ,
 {
     "alarm_type" : "reminder",

@@ -191,6 +191,11 @@ aws dynamodb update-table \
     }' \
 --endpoint-url "http://localhost:8000"
 
+ aws dynamodb query --table-name user_alarms --endpoint-url "http://localhost:8000"  --key-condition-expression "alarm_type = :r" \
+ --expression-attribute-values '{ ":r" : { "S" : "reminder" } }' \
+ --endpoint-url "http://localhost:8000"
+
+
 
 
 

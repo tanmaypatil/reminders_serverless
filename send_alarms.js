@@ -1,6 +1,7 @@
 var AWS = require("aws-sdk");
 let slack = require('./send_slack');
 let date_util = require('./date_util');
+let insert_util = require('./move_dates');
 
 
 AWS.config.update({
@@ -10,11 +11,11 @@ AWS.config.update({
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-console.log("Querying for alarms");
 
-function send_alarms() {
+async function send_alarms() {
+    console.log("Querying for alarms");
     let input_date = date_util.getTodaysDate();
-    console.log('todays date '+input_date);
+    console.log('todays date ' + input_date);
     var params = {
         TableName: "user_alarms",
         KeyConditionExpression: "#alarm_type = :key and #alarm_date <= :alarm_date ",
@@ -27,19 +28,22 @@ function send_alarms() {
             ":alarm_date": input_date
         }
     };
+    try {
+        let arr = await query_alarm(params);
+        console.log('query alarms completed %d', arr.length);
+        for (let a of arr) {
+            await slack.send_slack(a.description);
+            await insert_util.insertAlarm(a);
+        }
+    }
+    catch (err) {
+        console.log(err.response.status);
+        console.log(err.response.statusText);
+    }
 
-    (async function () {
-        try {
-            let arr = await query_alarm(params);
-            await slack.send_slack(arr[0].description);
-        }
-        catch (err) {
-            console.log(err.response.status);
-            console.log(err.response.statusText);
-        }
-    })();
 
 }
+
 async function query_alarm(params) {
     return new Promise((resolve, reject) => {
         docClient.query(params, function (err, data) {
@@ -58,4 +62,10 @@ async function query_alarm(params) {
             }
         });
     });
+}
+
+send_alarms();
+
+module.exports = {
+    send_alarms : send_alarms
 }
