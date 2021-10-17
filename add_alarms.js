@@ -2,18 +2,25 @@ var AWS = require("aws-sdk");
 var fs = require('fs');
 let util = require("./utils");
 let create_table = require('./create_table_user_alarms');
+let endpoint = util.get_endpoint();
+console.log(`add_alarms : endpoint is ${endpoint} `);
 
 AWS.config.update({
-    region: "ap-south-1",
-    endpoint: "http://localhost:8000"
+    region: process.env.AWS_REGION,
+    endpoint: endpoint
 });
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-(async function() {
-await util.delete_table("user_alarms");
-await create_table.create_user_alarms();
-await import_alarms();
+(async function () {
+    try {
+        await util.delete_table("user_alarms");
+    }
+    catch (e) {
+        console.log('table does not exist' + e);
+    }
+    await create_table.create_user_alarms();
+    await import_alarms();
 })();
 
 
@@ -33,7 +40,7 @@ function import_alarms() {
             };
 
             if (alarm.alarm_type === "reminder") {
-                console.log('adding alarm '+alarm.description);
+                console.log('adding alarm ' + alarm.description);
                 params.Item.description = alarm.description;
                 params.Item.frequency = alarm.frequency;
                 params.Item.day = alarm.day;

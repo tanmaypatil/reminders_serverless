@@ -1,4 +1,5 @@
 var AWS = require("aws-sdk");
+require('dotenv').config();
 
 function delete_table(table_name) {
     return new Promise((resolve, reject) => {
@@ -19,6 +20,21 @@ function delete_table(table_name) {
     })
 }
 
+
+function get_endpoint() {
+    let endpoint = "http://localhost:8000";
+    if ( process.env.NODE_ENV  === 'development' ) {
+        return endpoint;
+    } 
+    else {
+        //endpoint = "dynamodb." + ap-south-1 + ".amazonaws.com" ; 
+        endpoint = "dynamodb." + process.env.AWS_REGION + ".amazonaws.com";    
+    }
+    console.log("endpoint is "+endpoint);
+    return endpoint;
+}
+
 module.exports = {
-    delete_table : delete_table
+    delete_table : delete_table,
+    get_endpoint : get_endpoint
 }

@@ -1,9 +1,11 @@
 var AWS = require("aws-sdk");
+let util = require("./utils");
+let endpoint = util.get_endpoint();
 
 
 AWS.config.update({
-    region: "ap-south-1",
-    endpoint: "http://localhost:8000"
+    region: process.env.AWS_REGION ,
+    endpoint: endpoint
 });
 
 

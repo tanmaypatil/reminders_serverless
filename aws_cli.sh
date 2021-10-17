@@ -195,6 +195,8 @@ aws dynamodb update-table \
  --expression-attribute-values '{ ":r" : { "S" : "reminder" } }' \
  --endpoint-url "http://localhost:8000"
 
+ aws lambda update-function-code --function-name send-alarms --zip-file fileb://leave_application_serverless.zip
+
 
 
 

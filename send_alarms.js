@@ -2,20 +2,21 @@ var AWS = require("aws-sdk");
 let slack = require('./send_slack');
 let date_util = require('./date_util');
 let insert_util = require('./move_dates');
-
+let util = require("./utils");
+let endpoint = util.get_endpoint();
 
 AWS.config.update({
-    region: "ap-south-1",
-    endpoint: "http://localhost:8000"
+    region: process.env.AWS_REGION,
+    endpoint: endpoint
 });
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 
 async function send_alarms() {
-    console.log("Querying for alarms");
+    console.log("send_alarms : Querying for alarms");
     let input_date = date_util.getTodaysDate();
-    console.log('todays date ' + input_date);
+    console.log('send_alarms : todays date ' + input_date);
     var params = {
         TableName: "user_alarms",
         KeyConditionExpression: "#alarm_type = :key and #alarm_date <= :alarm_date ",
@@ -30,7 +31,8 @@ async function send_alarms() {
     };
     try {
         let arr = await query_alarm(params);
-        console.log('query alarms completed %d', arr.length);
+        if (arr)
+           console.log('send_alarms : query alarms completed %d', arr.length);
         for (let a of arr) {
             await slack.send_slack(a.description);
             await insert_util.insertAlarm(a);
@@ -48,9 +50,10 @@ async function query_alarm(params) {
     return new Promise((resolve, reject) => {
         docClient.query(params, function (err, data) {
             if (err) {
-                console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+                console.error("query_alarm : Unable to query. Error:", JSON.stringify(err, null, 2));
+                reject(err);
             } else {
-                console.log("Query succeeded.");
+                console.log("query_alarm : Query succeeded.");
                 //var arr = [];
                 data.Items.forEach(function (item) {
                     console.log(" -", item.user_id + ": " + item.entity_id);
@@ -64,8 +67,9 @@ async function query_alarm(params) {
     });
 }
 
-send_alarms();
 
 module.exports = {
     send_alarms : send_alarms
 }
+
+send_alarms();
