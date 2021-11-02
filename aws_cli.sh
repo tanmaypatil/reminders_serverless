@@ -197,6 +197,41 @@ aws dynamodb update-table \
 
  aws lambda update-function-code --function-name send-alarms --zip-file fileb://leave_application_serverless.zip
 
+aws dynamodb update-table \
+    --table-name user_alarms \
+    --attribute-definitions '[
+         {
+          "AttributeName": "entity_id",
+          "AttributeType": "S"
+      }
+    ]' \
+    --global-secondary-index-updates '[
+        {
+            "Create": {
+                "IndexName": "entity_id-index",
+                "KeySchema": [
+                    {
+                        "AttributeName": "entity_id",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "Projection": {
+                    "ProjectionType": "ALL"
+                },
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": 1,
+                    "WriteCapacityUnits": 1
+                }
+            }
+        }
+    ]' \
+    --endpoint-url "http://localhost:8000"
+
+
+ aws dynamodb scan \
+    --table-name user_alarms \
+    --endpoint-url "http://localhost:8000"
+
 
 
 
