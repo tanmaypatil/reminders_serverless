@@ -10,4 +10,11 @@ jobs:
       with:
         type: 'zip'
         filename: 'alarm_lambda.zip'
-        exclusions: '*.git* /*node_modules/*  launch.json *.zip *.sh'
+        exclusions: '*.git* /*node_modules/*  launch.json *.zip *.sh *.bat *.md'
+    - name: upload lambda function zip file
+      run: |
+       aws lambda update-function-code --function-name send-alarms --zip-file fileb://alarm_lambda.zip
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: 'ap-south-1'
