@@ -13,7 +13,7 @@ function delete_table(table_name) {
                 console.error("Unable to delete table. Error JSON:", JSON.stringify(err, null, 2));
                 reject(err);
             } else {
-                console.log("Deleted table. Table description JSON:", JSON.stringify(data, null, 2));
+                console.log("Deleted table . Table description JSON:", JSON.stringify(data, null, 2));
                 resolve();
             }
         });
