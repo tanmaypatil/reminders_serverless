@@ -3,6 +3,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: secrets
     steps:
     - uses: actions/checkout@master
     - name: Archive Release
