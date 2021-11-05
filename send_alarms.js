@@ -34,7 +34,9 @@ async function send_alarms() {
         if (arr)
            console.log('send_alarms : query alarms completed %d', arr.length);
         for (let a of arr) {
-            await slack.send_slack(a.description);
+            let dueDate = date_util.formattedDate(a.alarm_date);
+            let desc = a.description + ' due date ' + dueDate;
+            await slack.send_slack(desc);
             await insert_util.insertAlarm(a);
         }
     }

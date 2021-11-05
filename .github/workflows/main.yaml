@@ -1,4 +1,4 @@
-name: Create Archive
+name: Deploy lambda 
 on: [push]
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
       with:
         type: 'zip'
         filename: 'alarm_lambda.zip'
-        exclusions: '*.git* /*node_modules/*  launch.json *.zip *.sh *.bat *.md'
+        exclusions: '*.git* /*node_modules/*  launch.json *.zip *.sh *.bat *.md LICENSE'
     - name: upload lambda function zip file
       run: |
        aws lambda update-function-code --function-name send-alarms --zip-file fileb://alarm_lambda.zip
