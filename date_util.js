@@ -17,7 +17,7 @@ function addDuration(durationType, duration, contextDate) {
     console.log(`addDuration  : durationType : ${durationType} , duration : ${duration} , contextDate : ${contextDate} `)
     // context date is not given , assume todays date.
     let d = contextDate ? parse(contextDate, 'yyyyMMdd', new Date()) : new Date();
-    durationObj = {};
+    let durationObj = {};
     switch (durationType) {
         case 'Months':
         case 'Month':
