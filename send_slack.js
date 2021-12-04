@@ -2,7 +2,8 @@ const axios = require('axios').default;
 require('dotenv').config();
 
 function send_slack(message,entity_id) {
-  console.log('send_slack ' + message + 'entity_id : '+entity_id);
+  let button_action = entity_id + '|done';
+  console.log('send_slack ' + message + 'button_action : '+button_action);
   axios.post(process.env.SLACK_ENDPOINT, {
     text: message,
     "blocks": [
@@ -27,7 +28,7 @@ function send_slack(message,entity_id) {
              "text": "Paid"
            },
            "style": "primary",
-           "value": entity_id
+           "value":  button_action
          },
          {
            "type": "button",
@@ -37,7 +38,7 @@ function send_slack(message,entity_id) {
              "text": "Snooze"
            },
            "style": "danger",
-           "value": "snooze"
+           "value": "snooze|snooze"
          }
        ]
      }
