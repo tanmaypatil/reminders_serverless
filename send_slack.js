@@ -25,7 +25,7 @@ function send_slack(message,entity_id) {
            "text": {
              "type": "plain_text",
              "emoji": true,
-             "text": "Paid"
+             "text": "paid"
            },
            "style": "primary",
            "value":  button_action

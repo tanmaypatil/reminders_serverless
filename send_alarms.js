@@ -36,7 +36,7 @@ async function send_alarms() {
         for (let a of arr) {
             let dueDate = date_util.formattedDate(a.alarm_date);
             let desc = a.description + ' due date ' + dueDate;
-            await slack.send_slack(desc,a.entity_id);
+            slack.send_slack(desc,a.entity_id);
             await insert_util.insertAlarm(a);
         }
     }
